@@ -1,0 +1,87 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValoCord - RiseRuins</title>
+    <link rel="website icon" href="images/ValoCord Radius.png" style="border-radius: 50%;">
+    <script src="./js/jquery.js"></script>
+    <script src="./css/tailwind.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+</style>
+
+<body class="bg-[#0F1822]">
+
+    <div class="relative w-full">
+        <div class="absolute w-full h-full bg-gradient-to-t from-[#0f1822] "></div>
+        <img src="images/Viper.png" class="w-full">
+    </div>
+
+
+    <div class="flex">
+        <div class="mt-3 ml-5">
+            <p class="text-white font-semibold mt-2 flex gap-1 items-center"><img width="16"
+                    src="https://elowell.gg/assets/valorant-96x96.svg"> VALORANT</p>
+        </div>
+
+        <div class="box-border h-[3rem] w-[12rem] p-4 mt-3 bg-[#1D2C3D] ml-5 rounded">
+            <center>
+                <p id="gameStatus" class="text-white font-semibold mt-[-5] flex gap-1 text-[#f15a27]">
+                    Open Valorant
+                </p>
+            </center>
+        </div>
+        <div class="mt-3 ml-[9rem]">
+            <p class="text-white font-semibold mt-2 flex gap-1 items-center"><i
+                    class="fa-brands fa-discord text-[#5865f2]"></i> Discord</p>
+        </div>
+        <div class="box-border h-[3rem] w-[12rem] p-4 mt-3 bg-[#1D2C3D] ml-5 rounded">
+            <center>
+                <p class="text-white font-semibold mt-[-5] flex gap-1 text-[#f15a27]" id="discordStatus">
+                    Open Discord App
+                </p>
+            </center>
+        </div>
+    </div>
+
+    <center>
+        <div class="mt-2 items-center justify-center flex">
+            <p class="text-white font-semibold mt-2  gap-1 items-center">Status:</p>
+        </div>
+        <div class="box-border h-[3rem] w-[12rem] p-4 mt-3 bg-[#1D2C3D] ml-5 rounded flex">
+            <p
+               id="status" class="text-center justify-center ml-[3rem] text-white font-semibold mt-[-5] flex gap-1 underline text-[#ed4245]">
+                Not Ready
+            </p>
+        </div>
+    </center>
+    <div class="mt-2">
+        <center>
+            <button onclick="sendMessage('login')"
+                class="bg-[#1D2C3D] hover:bg-[#1D2C5D] text-white font-bold rounded h-[3rem] w-[12rem] p-4 mt-3 bg-[#1D2C3D] ml-5 rounded">
+                <p class="text-white font-semibold mt-[-5] ml-7 flex gap-1 text-[#3ba55c]">
+                    Activate RPC
+                </p>
+            </button>
+            <button onclick="sendMessage('logout')"
+                class="bg-[#1D2C3D] hover:bg-[#1D2C5D] text-white font-bold rounded h-[3rem] w-[12rem] p-4 mt-3 bg-[#1D2C3D] ml-5 rounded">
+                <p class="text-white font-semibold mt-[-5] ml-5 flex gap-1 text-[#ed4245]">
+                    Disable RPC
+                </p>
+            </button>
+        </center>
+    </div>
+    <center>
+        <button onclick="sendMessage('discord')">
+            <img class="mt-8 opacity-[0.2]" src="images/ValoCordText.png" alt="ValoCord" width="156">
+        </button>
+    </center>
+    <script src="./renderer.js"></script>
+</body>

@@ -1,0 +1,64 @@
+{
+  "name": "valocord",
+  "productName": "Valocord",
+  "version": "1.0.3",
+  "description": "Valorant DiscordRPC Program.",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron .",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "RiseRuins",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "discord-rpc": "^4.0.1",
+    "easy-json-database": "^1.5.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^8.1.0",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.66",
+    "@electron-forge/maker-deb": "^6.0.0-beta.66",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.66",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
+    "@electron-forge/maker-zip": "^6.0.0-beta.66",
+    "electron": "^21.0.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets/icon.ico",
+        "asar": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "ValoCord",
+            "authors": "RiseRuins",
+            "setupIcon": "assets/icon.ico",
+            "setupExe": "ValoCord.exe"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
