@@ -4,7 +4,7 @@
 
 ## Installation
 
-- Download the latest release and setup the program.
+- Download the latest [release](https://github.com/Aronshire/ValoCord/releases) and setup the program.
 - Enjoy it :)
 
 ## Usage
