@@ -1,7 +1,7 @@
 const axios = require('axios');
 const RPC = require('discord-rpc');
 const { Notification } = require('electron');
-
+const { translate } = require('./client/utils')
 const Valorant = require('./client/valorant');
 const ValorantClient = new Valorant();
 
@@ -15,6 +15,7 @@ class Presence {
         this.maps = null;
         this.presence = null;
         this.isReady = false;
+        this.language = store.get("language") || "tr_TR";
         this.eventHandler();
     }
 
@@ -23,7 +24,7 @@ class Presence {
             this.isReady = false;
             new Notification({
                 title: 'ValoCord',
-                body: 'Please open the Discord app. If it is on and not working, try again in 5 minutes.',
+                body: translate(this.language, "notification:discord_error"),
             }).show();
         });
     }
@@ -36,7 +37,7 @@ class Presence {
         this.maps = await axios.get('https://valorant-api.com/v1/maps').then(res => res.data.data);
 
         let interval = setInterval(async () => {
-
+            this.language = store.get("language") || "tr_TR";
             if (!this.isReady) {
                 clearInterval(interval);
                 return;
@@ -49,8 +50,6 @@ class Presence {
                 return;
             };
 
-            
-
             if (this.lastState !== data.status) {
                 this.lastState = data.status;
                 this.date = new Date();
@@ -60,8 +59,8 @@ class Presence {
 
                 this.presence = {
                     details: 'Game Starting',
-                    largeImageKey: 'https://images.cults3d.com/4QqRV9kLYYEuw9ur_X3yjQl1sjk=/516x516/https://files.cults3d.com/uploaders/15024335/illustration-file/a86d53e4-2bd9-4a8f-9550-986686c3131a/gi0mAjIh_400x400.png',
-                    largeImageText: 'ValorCord by RiseRuins',
+                    largeImageKey: 'https://files.cults3d.com/uploaders/15024335/illustration-file/a86d53e4-2bd9-4a8f-9550-986686c3131a/gi0mAjIh_400x400.png',
+                    largeImageText: 'ValoCord by RiseRuins',
                     buttons: [{label: "Discord", url: "https://discord.gg/s2sdcwckpf"}],
                     startTimestamp: this.date,
                 }
@@ -70,8 +69,8 @@ class Presence {
 
             if (data.status === 'MENUS') {
                 this.presence = {
-                    details: 'Lobby - ' + data.queueId.replace("onefea", "replication").replace("ggteam", "escalation").toUpperCase(),
-                    largeImageKey: 'https://images.cults3d.com/4QqRV9kLYYEuw9ur_X3yjQl1sjk=/516x516/https://files.cults3d.com/uploaders/15024335/illustration-file/a86d53e4-2bd9-4a8f-9550-986686c3131a/gi0mAjIh_400x400.png',
+                    details: translate(this.language, "presence:menus:details") + (translate(this.language, `presence:pregame:type:${data.queueId.toLowerCase()}`) ?? data.queueId),
+                    largeImageKey: 'https://files.cults3d.com/uploaders/15024335/illustration-file/a86d53e4-2bd9-4a8f-9550-986686c3131a/gi0mAjIh_400x400.png',
                     largeImageText: 'Valorant',
                     startTimestamp: this.date,
                 }
@@ -90,8 +89,8 @@ class Presence {
             if (data.status === 'PREGAME' && data.match) {
                 let map = this.maps.find(map => map.mapUrl === data.match.map);
                 this.presence = {
-                    details: 'Selecting Agent',
-                    state: data.queueId ? data.queueId.replace('CustomGame', 'Custom Game').toUpperCase() : "Custom Game",
+                    details: translate(this.language, "presence:pregame:details"),
+                    state: data.match.mode ? (translate(this.language, `presence:pregame:type:${data.match.mode.toLowerCase()}`) ?? data.match.mode) : "Custom Game",
                     largeImageKey: map.splash,
                     largeImageText: map.displayName,
                     startTimestamp: this.date,
@@ -102,8 +101,8 @@ class Presence {
                 let map = this.maps.find(map => map.mapUrl === data.match.map);
                 let agent = await axios.get(`https://valorant-api.com/v1/agents/${data.match.charaterID}`).then(res => res.data.data);
                 this.presence = {
-                    details: "In Game [" + data.match.score.ally + " - " + data.match.score.enemy + ']',
-                    state: data.match.queueId ? data.match.queueId.replace('CustomGame', 'Custom Game').toUpperCase() : "Custom Game",
+                    details: translate(this.language, "presence:ingame:details") + "[" + data.match.score.ally + " - " + data.match.score.enemy + ']',
+                    state: data.match.mode ? (translate(this.language, `presence:pregame:type:${data.match.mode.toLowerCase()}`) ?? data.match.mode) : "Custom Game",
                     largeImageKey: map.splash,
                     largeImageText: map.displayName,
                     smallImageKey: agent.displayIcon,
@@ -111,7 +110,6 @@ class Presence {
                     startTimestamp: this.date,
                 }
             };
-            console.log('Updating presence...', this.date);
             this.client.setActivity(this.presence).catch(console.log);
 
 

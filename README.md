@@ -11,7 +11,7 @@
 - Firstly setup the program.
 - Open Valorant and Discord app.
 - Your discord account will be automatically linked when Valorant is opened.
-    - Your Discord account will be automatically identified. If it doesn't work, press the Active RPC button.
+    - Your Discord account will be automatically identified. If it doesn't work, click the Active RPC button.
 
 ## Update
 

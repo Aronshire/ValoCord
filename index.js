@@ -1,15 +1,16 @@
 const { app, BrowserWindow, Notification, ipcMain, Tray, Menu, nativeImage, shell } = require('electron')
+const { translate } = require('./client/utils')
 const path = require('path')
 const url = require('url')
 let win = null
 let tray = null
 const Store = require('electron-store');
-const store = new Store();
+const store = global.store = new Store();
 
 function createWindow() {
     win = new BrowserWindow({
         width: 830,
-        height: 550,
+        height: 580,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -44,7 +45,6 @@ function createWindow() {
     })
 
     Menu.setApplicationMenu(null)
-
 }
 
 app.whenReady().then(() => {
@@ -75,6 +75,8 @@ const PresenceClient = new Presence();
 
 
 ipcMain.on('getStatus', async (event, arg) => {
+    let language = store.get("language") ?? "tr_TR"
+
     event.sender.send('status', {
         valorant: {
             status: ValorantClient.isReady,
@@ -83,7 +85,8 @@ ipcMain.on('getStatus', async (event, arg) => {
         discord: {
             status: PresenceClient.isReady,
             user: PresenceClient.client.user
-        }
+        },
+        language: language
     });
 
 })
@@ -103,5 +106,12 @@ ipcMain.on('logout', async (event, arg) => {
 ipcMain.on('discord', async (event, arg) => {
 
     shell.openExternal('https://discord.gg/s2sdcwckpf')
+
+});
+
+ipcMain.on('changeLanguage', async (event, arg) => {
+
+    store.set("language", arg)
+
 
 });
