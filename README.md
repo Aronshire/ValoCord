@@ -17,10 +17,13 @@
 
 You can follow my twitter account or github project for updates.
 
+## News
+- Multiple language added
+- The program has been optimized
+
 ## Possible Future Updates
 
 - Auto update system.
-- Multiple language (Turkish, Russian etc.)
 - Join Valorant party from Discord.
 - Read old friend messages.
 
