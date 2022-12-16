@@ -4,7 +4,7 @@
 
 ## Installation
 
-- Download the latest release and setup the program.
+- Download the latest [release](https://github.com/Aronshire/ValoCord/releases) and setup the program.
 - Enjoy it :)
 
 ## Usage
@@ -23,3 +23,7 @@ You can follow my twitter account or github project for updates.
 - Multiple language (Turkish, Russian etc.)
 - Join Valorant party from Discord.
 - Read old friend messages.
+
+![image](https://user-images.githubusercontent.com/64329332/194653080-546007e4-23ff-4b9b-a453-8df072e46a66.png)
+![FeLABYxWQAIBvu_](https://user-images.githubusercontent.com/64329332/194653198-77585d65-eed9-4397-bfd5-70a294d137d4.png)
+![FeLACJrXkAMz8om](https://user-images.githubusercontent.com/64329332/194653202-75aff0d8-387c-42aa-91d0-e01818590dd7.png)
