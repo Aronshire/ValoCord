@@ -1,7 +1,7 @@
 {
   "name": "valocord",
   "productName": "ValoCord",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Valorant DiscordRPC Program.",
   "main": "index.js",
   "scripts": {
